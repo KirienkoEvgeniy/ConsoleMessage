@@ -11,6 +11,7 @@ public class TestConsoleMessageGoodWorldWorker {
 
     @Test
     public void testGetEvent() throws ParseException {
+        consoleMessageGoodWorldWorker = new ConsoleMessageGoodWorldWorker();
         switch (consoleMessageGoodWorldWorker.getTime()) {
             case "morning":
                 break;
