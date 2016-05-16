@@ -1,7 +1,7 @@
 import org.junit.Assert;
 import org.junit.Test;
-
 import java.text.ParseException;
+import java.util.Locale;
 
 /**
  * Created by Evgeniy
@@ -11,15 +11,14 @@ public class TestConsoleMessageGoodWorldWorker {
 
     @Test
     public void testGetEvent() throws ParseException {
-        consoleMessageGoodWorldWorker = ConsoleMessageGoodWorldWorker.newBuilder().build();
         switch (consoleMessageGoodWorldWorker.getTime()) {
-            case "MORNING":
+            case "morning":
                 break;
-            case "DAY":
+            case "day":
                 break;
-            case "EVENING":
+            case "evening":
                 break;
-            case "NIGHT":
+            case "night":
                 break;
             default:
                 Assert.fail();
@@ -28,73 +27,77 @@ public class TestConsoleMessageGoodWorldWorker {
 
     @Test
     public void testNightBorderConditionSecond() throws ParseException {
-        consoleMessageGoodWorldWorker = ConsoleMessageGoodWorldWorker.newBuilder("05:59:59").build();
-        Assert.assertEquals(consoleMessageGoodWorldWorker.getTime(), "NIGHT");
+        consoleMessageGoodWorldWorker = new ConsoleMessageGoodWorldWorker("05:59:59");
+        Assert.assertEquals(consoleMessageGoodWorldWorker.getTime(), "night");
     }
 
     @Test
     public void testMorningBorderConditionFirst() throws ParseException {
-        consoleMessageGoodWorldWorker = ConsoleMessageGoodWorldWorker.newBuilder("06:00:01").build();
-        Assert.assertEquals(consoleMessageGoodWorldWorker.getTime(), "MORNING");
+        consoleMessageGoodWorldWorker = new ConsoleMessageGoodWorldWorker("06:00:01");
+        Assert.assertEquals(consoleMessageGoodWorldWorker.getTime(), "morning");
     }
 
     @Test
     public void testMorning() throws ParseException {
-        consoleMessageGoodWorldWorker = ConsoleMessageGoodWorldWorker.newBuilder("07:30:01").build();
-        Assert.assertEquals(consoleMessageGoodWorldWorker.getTime(), "MORNING");
+        consoleMessageGoodWorldWorker = new ConsoleMessageGoodWorldWorker("07:30:01");
+        Assert.assertEquals(consoleMessageGoodWorldWorker.getTime(), "morning");
     }
 
     @Test
     public void testMorningBorderConditionSecond() throws ParseException {
-        consoleMessageGoodWorldWorker = ConsoleMessageGoodWorldWorker.newBuilder("08:59:59").build();
-        Assert.assertEquals(consoleMessageGoodWorldWorker.getTime(), "MORNING");
+        consoleMessageGoodWorldWorker = new ConsoleMessageGoodWorldWorker("08:59:59");
+        Assert.assertEquals(consoleMessageGoodWorldWorker.getTime(), "morning");
     }
 
     @Test
     public void testDayBorderConditionFirst() throws ParseException {
-        consoleMessageGoodWorldWorker = ConsoleMessageGoodWorldWorker.newBuilder("09:00:01").build();
-        Assert.assertEquals(consoleMessageGoodWorldWorker.getTime(), "DAY");
+        Locale localeRu = new Locale("ru", "RU");
+        consoleMessageGoodWorldWorker = new ConsoleMessageGoodWorldWorker("09:01:01", localeRu);
+        Assert.assertEquals(consoleMessageGoodWorldWorker.getTime(), "day");
     }
 
     @Test
-    public void testDay() throws ParseException {
-        consoleMessageGoodWorldWorker = ConsoleMessageGoodWorldWorker.newBuilder("14:01:01").build();
-        Assert.assertEquals(consoleMessageGoodWorldWorker.getTime(), "DAY");
-    }
-
+    public void testDayBorderCondition() throws ParseException {
+        Locale localeRu = new Locale("ru", "RU");
+        consoleMessageGoodWorldWorker = new ConsoleMessageGoodWorldWorker("14:01:01", localeRu);
+        Assert.assertEquals(consoleMessageGoodWorldWorker.getTime(), "day");
+         }
     @Test
     public void testDayBorderConditionSecond() throws ParseException {
-        consoleMessageGoodWorldWorker = ConsoleMessageGoodWorldWorker.newBuilder("18:59:59").build();
-        Assert.assertEquals(consoleMessageGoodWorldWorker.getTime(), "DAY");
-    }
-
+        Locale localeRu = new Locale("ru", "RU");
+        consoleMessageGoodWorldWorker = new ConsoleMessageGoodWorldWorker("18:59:59", localeRu);
+        Assert.assertEquals(consoleMessageGoodWorldWorker.getTime(), "day");
+         }
     @Test
     public void testEveningBorderConditionFirst() throws ParseException {
-        consoleMessageGoodWorldWorker = ConsoleMessageGoodWorldWorker.newBuilder("19:00:01").build();
-        Assert.assertEquals(consoleMessageGoodWorldWorker.getTime(), "EVENING");
-    }
+        Locale localeRu = new Locale("ru", "RU");
+        consoleMessageGoodWorldWorker = new ConsoleMessageGoodWorldWorker("19:01:01", localeRu);
+        Assert.assertEquals(consoleMessageGoodWorldWorker.getTime(), "evening");
+   }
+
 
     @Test
     public void testEvening() throws ParseException {
-        consoleMessageGoodWorldWorker = ConsoleMessageGoodWorldWorker.newBuilder("22:01:01").build();
-        Assert.assertEquals(consoleMessageGoodWorldWorker.getTime(), "EVENING");
+        consoleMessageGoodWorldWorker = new ConsoleMessageGoodWorldWorker("22:01:01");
+        Assert.assertEquals(consoleMessageGoodWorldWorker.getTime(), "evening");
     }
 
     @Test
     public void testEveningBorderConditionSecond() throws ParseException {
-        consoleMessageGoodWorldWorker = ConsoleMessageGoodWorldWorker.newBuilder("22:59:59").build();
-        Assert.assertEquals(consoleMessageGoodWorldWorker.getTime(), "EVENING");
+        consoleMessageGoodWorldWorker = new ConsoleMessageGoodWorldWorker("22:59:59");
+        Assert.assertEquals(consoleMessageGoodWorldWorker.getTime(), "evening");
     }
 
     @Test
     public void testNightBorderConditionFirst() throws ParseException {
-        consoleMessageGoodWorldWorker = ConsoleMessageGoodWorldWorker.newBuilder("23:00:01").build();
-        Assert.assertEquals(consoleMessageGoodWorldWorker.getTime(), "NIGHT");
+        consoleMessageGoodWorldWorker = new ConsoleMessageGoodWorldWorker("23:00:01");
+        Assert.assertEquals(consoleMessageGoodWorldWorker.getTime(), "night");
     }
 
     @Test
     public void testNight() throws ParseException {
-        consoleMessageGoodWorldWorker = ConsoleMessageGoodWorldWorker.newBuilder("03:30:01").build();
-        Assert.assertEquals(consoleMessageGoodWorldWorker.getTime(), "NIGHT");
+        consoleMessageGoodWorldWorker = new ConsoleMessageGoodWorldWorker("03:30:01");
+        Assert.assertEquals(consoleMessageGoodWorldWorker.getTime(), "night");
     }
+
 }
